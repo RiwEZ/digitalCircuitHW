@@ -1,4 +1,4 @@
-`include "BitCount_UD.v"
+`include "BitCount_UD_addG.v"
 
 module stimulus;
     reg clk;
@@ -6,7 +6,11 @@ module stimulus;
     reg x;
     wire [1:0]q;
 
-    bitCount_UD bitCUD(q, x, clk, reset);
+    // HW04 Add output L (G Block)
+    wire [1:0]l;
+    assign L = l[0]; // for showing Output (L) becuz q is 2bit array and L is 1bit
+
+    bitCount_UD_addG bitCUD(q, l, x, clk, reset);
 
     initial
         clk = 1'b0;
@@ -19,7 +23,7 @@ module stimulus;
 
     initial 
         begin
-            $dumpfile("2bitCUD_Wave.vcd");
+            $dumpfile("2bitCUD_AddG.vcd");
             $dumpvars(0, stimulus);
             reset = 1'b1;
             x = 1'b0;
@@ -32,6 +36,6 @@ module stimulus;
         end
 
     initial
-        $monitor($time, " output q = %d (%d%d) reset = %d x = %d",q, q[1], q[0], reset, x);
+        $monitor($time, " output L = %d  q = %d (%d%d) reset = %d x = %d",L, q, q[1], q[0], reset, x);
     
 endmodule
