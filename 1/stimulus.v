@@ -10,7 +10,7 @@ module stimulus();
     always #15 cin = ~cin;
 
     initial begin
-        $dumpfile("MUXTimeDiagram.vcd");
+        $dumpfile("TimeDiagram.vcd");
         $dumpvars(0, stimulus);
         a = 1'b0;
         b = 1'b0;
